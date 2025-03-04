@@ -22,18 +22,35 @@
     <div id="stock-grid"></div>
 
     <script>
-        function addStock() {
-            const symbol = document.getElementById("stockInput").value.toUpperCase();
-            if (!symbol) return;
-            
-            const stockGrid = document.getElementById("stock-grid");
-            const div = document.createElement("div");
-            div.className = "stock-chart";
-            div.innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${symbol}" width="300" height="200" frameborder="0"></iframe>`;
+    function addStock() {
+        const symbol = document.getElementById("stockInput").value.toUpperCase();
+        if (!symbol) return;
 
-            
-            document.getElementById("stockInput").value = "";
-        }
-    </script>
+        const stockGrid = document.getElementById("stock-grid");
+        const div = document.createElement("div");
+        div.className = "stock-chart";
+        div.innerHTML = `
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
+                {
+                    "symbol": "${symbol}",
+                    "width": "300",
+                    "height": "200",
+                    "locale": "en",
+                    "dateRange": "1D",
+                    "colorTheme": "light",
+                    "isTransparent": false,
+                    "autosize": false,
+                    "largeChartUrl": ""
+                }
+                </script>
+            </div>`;
+        
+        stockGrid.appendChild(div);
+        document.getElementById("stockInput").value = "";
+    }
+</script>
+
 </body>
 </html>
