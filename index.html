@@ -29,8 +29,8 @@
             const stockGrid = document.getElementById("stock-grid");
             const div = document.createElement("div");
             div.className = "stock-chart";
-            div.innerHTML = `<iframe src="https://www.google.com/finance/embed?q=${symbol}" width="300" height="200"></iframe>`;
-            stockGrid.appendChild(div);
+            div.innerHTML = `<iframe src="https://s.tradingview.com/widgetembed/?symbol=${symbol}" width="300" height="200" frameborder="0"></iframe>`;
+
             
             document.getElementById("stockInput").value = "";
         }
